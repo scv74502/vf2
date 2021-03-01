@@ -5,15 +5,9 @@
       color="primary"
       dark
     >
-    <v-app-bar-nav-icon @click="drawer = !drawer" />
-    <v-toolbar-title>Page Title</v-toolbar-title>
-    <v-spacer/>
-    <v-btn icon to="/about">
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
-    <v-btn icon to="/">
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <site-title :title="title"></site-title>
+      <v-spacer/>
     </v-app-bar>
      <v-navigation-drawer app v-model="drawer">
       <v-list-item>
@@ -26,48 +20,33 @@
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-
       <v-divider></v-divider>
-
-      <v-list
-        dense
-        nav
-      >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-navigation-drawer v-model="drawer">
-      wefwef
+      <site-menu></site-menu>
     </v-navigation-drawer>
     <v-content>
+    <site-footer :footer="footer"></site-footer>
       <router-view/>
     </v-content>
-    <v-footer app color="primary" dark absolute>
-      <v-spacer></v-spacer>
-      <div>&copy; {{ new Date().getFullYear() }}</div>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
+import SiteTitle from '@/views/site/title'
+import SiteFooter from '@/views/site/footer'
+import SiteMenu from '@/views/site/menu'
+
 export default {
+  components: { SiteTitle, SiteFooter, SiteMenu },
   name: 'App',
   data () {
     return {
-      drawer: false
+      drawer: false,
+      itmes: [],
+      title: '나의 타이틀입니다',
+      footer: '푸터입니다'
     }
+  },
+  mounted () {
   }
 }
 </script>
